@@ -1,25 +1,52 @@
 const app = function () {
-    //1. Create the parent container and it's class
-    const catListContainer = document.createElement('ul');
-    catListContainer.classList.add('cat')
-    //2. Create the first child
-    const firstListItem = document.createElement('li');
-    firstListItem.innerText = 'Name: Charlie'
-    //3. Create the second child element(favourite food)
-    const secondListItem = document.createElement('li');
-    secondListItem.innerText = 'Favourite food: Sheba';
-    //4. Create the third child element (img)
-    const thirdListItem= document.createElement('li');
-    thirdListItem.innerHTML = '<img width="500" src="himalyan_catjpg.jpg">';
-    //5. Append the list items to the list container
-    catListContainer.appendChild(firstListItem);
-    catListContainer.appendChild(secondListItem);
-    catListContainer.appendChild(thirdListItem);
-    //6. Add everything to the quotes list
-    const catsSection = document.getElementById('cats');
-    catsSection.appendChild(catListContainer);
-    // firstListItem.style.backgroundColor = 'wheat';
+
+    addCat('Charlie', 'Sheba', 'himalayan_cat.jpg');
 
 }
+
+function addCat(name, favouriteFood, image) {
+    const catItemContainer = createCatItemContainer();
+    const nameItem = createNameItem(name);
+    const foodItem = createFoodItem(favouriteFood);
+    const imgItem = createImageItem(image);
+    const catSection = document.getElementById('cats');
+    appendElements(catSection, catItemContainer, nameItem, foodItem, imgItem);
+}
+
+function createImageItem(image) {
+    const imageItem = document.createElement('li');
+    const imageTag = document.createElement('img');
+    imageTag.width = 500;
+    imageTag.src = image;
+    imageItem.appendChild(imageTag);
+    return imageItem;
+}
+
+
+function createFoodItem(favouriteFood) {
+    const foodItem = document.createElement('li');
+    foodItem.innerText = 'Favourite food: '+ favouriteFood;
+    return foodItem;
+}
+
+function createNameItem(name) {
+    const listItem = document.createElement('li');
+    listItem.innerText = 'Name: ' + name;
+    return listItem;
+}
+
+function createCatItemContainer() {
+    const catListContainer = document.createElement('ul');
+    catListContainer.classList.add('cat');
+    return catListContainer;
+}
+
+function appendElements(catSection, catItemContainer, nameItem, foodItem, imgItem) {
+    catItemContainer.appendChild(nameItem);
+    catItemContainer.appendChild(foodItem);
+    catItemContainer.appendChild(imgItem);
+    catSection.appendChild(catItemContainer);
+}
+
 
 document.addEventListener("DOMContentLoaded", app);
